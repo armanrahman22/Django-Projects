@@ -1,0 +1,20 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+
+{% block body_block %}
+    {% for poll in poll_list %}
+        <li>{{ poll.question }}
+            <ul>
+                {% for loc in poll.loclist.all %}
+                    <li>{{ loc.location }}--
+                        <button class="button" id="remove_{{ poll.id }}{{ loc.id }}" data-removeid="{{ poll.id }}{{ loc.id }}" type="button">Remove</button>
+                    </li> <br/>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+{% endblock %}
+
+{% block footer %}
+    <script src="{% static "js/delete.js" %}"></script>
+{% endblock %}

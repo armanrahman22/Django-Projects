@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/bootstrap-fluid-adj.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
+    {% block head%}{% endblock %}
+    <title>Polling Application: {% block title %}{% endblock %}</title>
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <a class="brand" href="/polls/">PollingApp</a>
+        <ul class="nav ">
+            <li><a href="/polls/phikaps2015areawesome/">phikaps2015areawesome</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            {% block body_block %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+<hr>
+<footer>
+    <p>&copy; PollingApp</p>
+</footer>
+<script src="{% static "js/jquery.js" %}"></script>
+{% block footer %}{% endblock %}
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

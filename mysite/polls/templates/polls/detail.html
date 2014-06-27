@@ -1,0 +1,46 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+
+{% block body_block %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span6">
+                <h1>{{ poll.question }}</h1>
+
+                <form id="voteForm" action="{% url 'polls:vote' %}" method="get">
+                    {% csrf_token %}
+                    {% for choice in poll.choice_set.all %}
+                        <input type="radio" name="choice" id="choice{{ choice.id }}" value="{{ choice.id }}"/>
+                        <b>{{ choice.choice_text }}</b><br/><br/>
+                    {% endfor %}
+                    Location:
+                    <select name="locations">
+                        {% for location in poll.loclist.all %}
+                            <option value="{{ location }}">{{ location }}</option>
+                        {% endfor %}
+                    </select> <br>
+
+                    <input type="submit" data-pollid="{{ poll.id }}" value="Vote" id="vote_but"/><br/>
+                </form>
+
+            </div>
+
+            <div class="span6" id="refresh" style="display:none;">
+                <h1>Results</h1> <br/>
+                <ul>
+                    {% for choice in poll.choice_set.all %}
+                        <li>
+                            {{ choice.choice_text }} -- <b id="like_count_{{ choice.id }}">{{ choice.votes }}</b>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <a href="/polls/{{ poll.id }}/">Vote again?</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <script src="{% static "js/vote.js" %}"></script>
+{% endblock %}
